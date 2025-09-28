@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import 'reflect-metadata';
 import http from 'http';
 import { App } from './app.js';
 import { DbConnect } from './db/connect.js';
