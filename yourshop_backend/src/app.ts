@@ -5,7 +5,7 @@ import { registerRequestLogging } from './middlewares/logging.middleware.js';
 import { NotFoundHandler } from './middlewares/notFound.middleware.js';
 import { ErrorHandler } from './middlewares/errorHandler.middleware.js';
 
-import 
+import productsController from './modules/products/products.controller.js'
 
 export class App {
     private app: Application
@@ -30,7 +30,8 @@ export class App {
     }
 
     private registerRoutes() {
-        this.app.use('/products', )
+        this.app.use('/products', productsController)
+        
         // Zawsze na końcu 404:
         this.app.use(NotFoundHandler.handle)
     }
