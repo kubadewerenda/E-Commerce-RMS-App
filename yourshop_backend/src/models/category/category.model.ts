@@ -59,11 +59,11 @@ export default class Category extends Model<Category> {
 
     @CreatedAt
     @Column(DataType.DATE)
-    createdAt!: Date
+    created_at!: Date
 
     @UpdatedAt
     @Column(DataType.DATE)
-    updatedAt!: Date
+    updated_at!: Date
 
     @BeforeValidate
     static async setSlug(instance: Category){
@@ -72,9 +72,5 @@ export default class Category extends Model<Category> {
         if(!instance.slug || instance.slug !== desired){
             instance.slug = await ensureUniqueSlug(Category, desired, 'slug', instance.id ?? null)
         }
-    }
-
-    toString(){
-        return instanceOfStringCategory(this)
     }
 }

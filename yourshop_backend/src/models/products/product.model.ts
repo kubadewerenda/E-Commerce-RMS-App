@@ -21,23 +21,8 @@ import { baseSlug, ensureUniqueSlug } from '../common/slug.util'
 import Category from '../category/category.model'
 import ProductSpecification from './productSpecification.model'
 import ProductVariant from './productVariant.model'
-import ProductImage from './productImage.model'
 
 @DefaultScope(() => ({ order: [['name', 'ASC']] }))
-@Scopes({
-    withCategory: { include: [{ model: () => Category, as: 'category' }] },
-    withImages: { include: [{ model: () => ProductImage, as: 'images' }] },
-    withVariants: { include: [{ model: () => ProductVariant, as: 'variants' }] },
-    withSpecifications: { include: [{ model: () => ProductSpecification, as: 'specifications' }] },
-    withAll: {
-        include: [
-        { model: () => Category, as: 'category' },
-        { model: () => ProductImage, as: 'images' },
-        { model: () => ProductVariant, as: 'variants' },
-        { model: () => ProductSpecification, as: 'specifications' },
-        ],
-    },
-})
 @Table({ tableName: 'products', timestamps: true })
 export default class Product extends Model<Product>{
     @PrimaryKey
@@ -63,7 +48,11 @@ export default class Product extends Model<Product>{
     @Column(DataType.INTEGER)
     categoryId!: number | null
 
-    @BelongsTo(() => Category, { as: 'category', foreignKey: 'categoryId', onDelete: 'SET NULL' })
+    @BelongsTo(() => Category,{
+        as: 'category', 
+        foreignKey: 'categoryId', 
+        onDelete: 'SET NULL' 
+    })
     category?: Category | null
 
     @AllowNull(false)
@@ -76,13 +65,19 @@ export default class Product extends Model<Product>{
     @Column(DataType.BOOLEAN)
     is_active!: boolean
 
-    @HasMany(() => ProductImage, { as: 'images', foreignKey: 'productId', onDelete: 'CASCADE' })
-    images?: ProductImage[] | null
 
-    @HasMany(() => ProductSpecification, { as: 'specifications', foreignKey: 'productId', onDelete: 'CASCADE' })
+    @HasMany(() => ProductSpecification, { 
+        as: 'specifications', 
+        foreignKey: 'productId', 
+        onDelete: 'CASCADE' 
+    })
     specifications?: ProductSpecification[] | null
 
-    @HasMany(() => ProcudtVariant, { as: 'variants', foreignKey: 'productId', onDelete: 'CASCADE' })
+    @HasMany(() => ProductVariant, { 
+        as: 'variants', 
+        foreignKey: 'productId', 
+        onDelete: 'CASCADE' 
+    })
     variants?: ProductVariant[] | null
 
     @CreatedAt
@@ -100,9 +95,5 @@ export default class Product extends Model<Product>{
         if(!instance.slug || instance.slug !== desired){
             instance.slug = await ensureUniqueSlug(Product, desired, 'slug', instance.id ?? null)
         }
-    }
-
-    toString(){
-        return this.name
     }
 }

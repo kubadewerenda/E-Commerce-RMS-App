@@ -10,23 +10,27 @@ DefaultScope,
 ForeignKey,
 BelongsTo,
 } from 'sequelize-typescript'
-import Product from './product.model'
+import ProductVariant from './productVariant.model'
 
 @DefaultScope(() => ({ order: [['name', 'ASC']] }))
-@Table({ tableName: 'product_specifications', timestamps: false })
-export default class ProductSpecification extends Model<ProductSpecification>{
+@Table({ tableName: 'product_variant_specifications', timestamps: false })
+export default class ProductVariantSpecification extends Model<ProductVariantSpecification>{
     @PrimaryKey
     @AutoIncrement
     @Column(DataType.INTEGER)
     id!: number
 
-    @ForeignKey(() => Product)
+    @ForeignKey(() => ProductVariant)
     @AllowNull(false)
     @Column(DataType.INTEGER)
-    productId!: number
+    variantId!: number
 
-    @BelongsTo(() => Product, { as: 'product', foreignKey: 'productId', onDelete: 'CASCADE' })
-    product?: Product
+    @BelongsTo(() => ProductVariant, { 
+        as: 'product', 
+        foreignKey: 'productId', 
+        onDelete: 'CASCADE' 
+    })
+    variant?: ProductVariant
 
     @AllowNull(false)
     @Column(DataType.STRING(100))
