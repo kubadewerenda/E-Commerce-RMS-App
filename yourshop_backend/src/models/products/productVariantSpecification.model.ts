@@ -26,8 +26,8 @@ export default class ProductVariantSpecification extends Model<ProductVariantSpe
     variantId!: number
 
     @BelongsTo(() => ProductVariant, { 
-        as: 'product', 
-        foreignKey: 'productId', 
+        as: 'variant', 
+        foreignKey: 'variantId', 
         onDelete: 'CASCADE' 
     })
     variant?: ProductVariant

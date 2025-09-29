@@ -39,32 +39,32 @@ export default class ProductVariant extends Model<ProductVariant>{
     })
     product?: Product
 
-    @AllowNull
+    @AllowNull(true)
     @Column(DataType.STRING(100))
     name!: string | null
 
-    @AllowNull
+    @AllowNull(true)
     @Column(DataType.DECIMAL(10, 2))
     price!: string | null
 
-    @AllowNull
+    @AllowNull(true)
     @Column(DataType.DECIMAL(10, 2))
-    discount_price!: string
+    discount_price!: string | null
 
-    @AllowNull
+    @AllowNull(false)
     @Default(0)
     @Column(DataType.INTEGER)
     stock!: number
 
-    @AllowNull
+    @AllowNull(true)
     @Unique(true)
     @Column(DataType.STRING(100))
     sku!: string | null
 
-    @AllowNull
+    @AllowNull(true)
     @Default(true)
     @Column(DataType.BOOLEAN)
-    is_active!: boolean
+    is_active!: boolean | null
 
     @HasMany(() => ProductVariantSpecification, {
         as: 'specifications',
@@ -75,7 +75,7 @@ export default class ProductVariant extends Model<ProductVariant>{
 
     @HasMany(() => ProductImage, {
         as: 'images', 
-        foreignKey: 'productId', 
+        foreignKey: 'variantId', 
         onDelete: 'CASCADE' 
     })
     images?: ProductImage[] | null

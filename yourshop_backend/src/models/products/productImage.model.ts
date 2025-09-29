@@ -11,7 +11,7 @@ ForeignKey,
 BelongsTo,
 BeforeValidate,
 } from 'sequelize-typescript'
-import ProductVariant from './product.model.js'
+import ProductVariant from './productVariant.model.js'
 
 @DefaultScope(() => ({ order: [['id', 'DESC']] }))
 @Table({ tableName: 'product_images', timestamps: false })
@@ -33,7 +33,7 @@ export default class ProductImage extends Model<ProductImage>{
     })
     variant?: ProductVariant
 
-    @AllowNull
+    @AllowNull(false)
     @Column(DataType.STRING(512))
     image!: string
 

@@ -18,7 +18,7 @@ BeforeValidate,
 Scopes,
 } from 'sequelize-typescript'
 import { baseSlug, ensureUniqueSlug } from '../utils/slug.util.js'
-import Category from '../category/category.model.js'
+import Category from '../categories/category.model.js'
 import ProductSpecification from './productSpecification.model.js'
 import ProductVariant from './productVariant.model.js'
 
