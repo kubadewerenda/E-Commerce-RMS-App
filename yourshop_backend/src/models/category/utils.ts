@@ -1,4 +1,4 @@
-import Category from "./category.model";
+import Category from "./category.model.js";
 
 export function instanceOfStringCategory(cat: Category){
     const name = cat.name ?? ''

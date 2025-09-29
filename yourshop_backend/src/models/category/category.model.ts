@@ -15,9 +15,8 @@ HasMany,
 CreatedAt,
 UpdatedAt,
 BeforeValidate,
-} from 'sequelize-typescript';
-import { baseSlug, ensureUniqueSlug } from '../common/slug.util';
-import { instanceOfStringCategory } from './utils';
+} from 'sequelize-typescript'
+import { baseSlug, ensureUniqueSlug } from '../utils/slug.util.js'
 
 @DefaultScope(() => ({ order: [['name', 'ASC']] }))
 @Scopes(() => ({

@@ -10,9 +10,9 @@ DefaultScope,
 ForeignKey,
 BelongsTo,
 } from 'sequelize-typescript'
-import Product from './product.model'
+import Product from './product.model.js'
 
-@DefaultScope(() => ({ order: [['name', 'ASC']] }))
+@DefaultScope(() => ({ order: [['name', 'DESC']] }))
 @Table({ tableName: 'product_specifications', timestamps: false })
 export default class ProductSpecification extends Model<ProductSpecification>{
     @PrimaryKey

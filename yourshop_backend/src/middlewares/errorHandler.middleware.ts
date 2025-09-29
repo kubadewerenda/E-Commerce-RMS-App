@@ -1,11 +1,11 @@
 import type { NextFunction, Request, Response } from 'express';
-import { logger } from '../lib/logger';
+import { logger } from '../lib/logger.js';
 import {
     AppError,
     BadRequestException,
     InternalServerException,
-} from '../lib/errors';
-import { ErrorCodeEnum } from '../enums/error-code.enum';
+} from '../lib/errors.js';
+import { ErrorCodeEnum } from '../enums/error-code.enum.js';
 import { ZodError } from 'zod';
 
 export class ErrorHandler {

@@ -15,11 +15,11 @@ HasMany,
 BeforeValidate,
 } from 'sequelize-typescript'
 import { v4 as uuidv4 } from 'uuid';
-import Product from './product.model'
-import ProductVariantSpecification from './productVariantSpecification.model'
-import ProductImage from './productImage.model';
+import Product from './product.model.js'
+import ProductVariantSpecification from './productVariantSpecification.model.js'
+import ProductImage from './productImage.model.js';
 
-@DefaultScope(() => ({ order: [['name', 'ASC']] }))
+@DefaultScope(() => ({ order: [['name', 'DESC']] }))
 @Table({ tableName: 'product_variants', timestamps: false })
 export default class ProductVariant extends Model<ProductVariant>{
     @PrimaryKey
@@ -41,7 +41,7 @@ export default class ProductVariant extends Model<ProductVariant>{
 
     @AllowNull
     @Column(DataType.STRING(100))
-    v_name!: string | null
+    name!: string | null
 
     @AllowNull
     @Column(DataType.DECIMAL(10, 2))

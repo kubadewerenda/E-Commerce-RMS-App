@@ -25,7 +25,6 @@ export async function ensureUniqueSlug<T extends Model<any, any>>(
         return count > 0
     }
 
-    //Checking if slug exists- if it does push counter '-2' to the same slug
     while (await exists(slug)){
         slug = `${desired}-${counter}`
     }

@@ -11,10 +11,9 @@ ForeignKey,
 BelongsTo,
 BeforeValidate,
 } from 'sequelize-typescript'
-import ProductVariant from './product.model'
-import Product from './product.model'
+import ProductVariant from './product.model.js'
 
-@DefaultScope(() => ({ order: [['name', 'ASC']] }))
+@DefaultScope(() => ({ order: [['id', 'DESC']] }))
 @Table({ tableName: 'product_images', timestamps: false })
 export default class ProductImage extends Model<ProductImage>{
     @PrimaryKey
@@ -49,9 +48,9 @@ export default class ProductImage extends Model<ProductImage>{
             instance.alt_text = 'IMG-Variant'
             return
         }
-        const variant = await Product.findByPk(instance.variantId, {
-            attributes: ['v_name']
+        const variant = await ProductVariant.findByPk(instance.variantId, {
+            attributes: ['name']
         })
-        instance.alt_text = `IMG-${variant?.v_name}`;
+        instance.alt_text = `IMG-${variant?.name}`;
     }
 }

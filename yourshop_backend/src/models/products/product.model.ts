@@ -17,12 +17,12 @@ UpdatedAt,
 BeforeValidate,
 Scopes,
 } from 'sequelize-typescript'
-import { baseSlug, ensureUniqueSlug } from '../common/slug.util'
-import Category from '../category/category.model'
-import ProductSpecification from './productSpecification.model'
-import ProductVariant from './productVariant.model'
+import { baseSlug, ensureUniqueSlug } from '../utils/slug.util.js'
+import Category from '../category/category.model.js'
+import ProductSpecification from './productSpecification.model.js'
+import ProductVariant from './productVariant.model.js'
 
-@DefaultScope(() => ({ order: [['name', 'ASC']] }))
+@DefaultScope(() => ({ order: [['created_at', 'DESC']] }))
 @Table({ tableName: 'products', timestamps: true })
 export default class Product extends Model<Product>{
     @PrimaryKey
